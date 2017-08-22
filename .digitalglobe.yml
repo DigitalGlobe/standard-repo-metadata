@@ -3,6 +3,9 @@ Description: The GBDX batch compute engine
 source: https://github.com/tdg-platform/workflows
 poc_email: nricklin@digitalglobe.com
 team: GBDX Core
+documentation:
+  - external: https://gbdxdocs.digitalglobe.com/docs/workflow-api-course
+  - internal: https://link/to/internal/documentation
 
 related components: 
   - name: gbdx worker agent
