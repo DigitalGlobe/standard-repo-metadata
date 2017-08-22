@@ -1,1 +1,11 @@
+Name: GBDX workflow system
+Description: The GBDX batch compute engine
+repo: https://github.com/tdg-platform/workflows
+poc_email: nricklin@digitalglobe.com
+team: GBDX Core
 
+related components: 
+  - name: gbdx worker agent
+    repo: https://github.com/tdg-platform/workers_and_deciders
+  - name: another component
+    repo: https://github.com/some_other_repo
