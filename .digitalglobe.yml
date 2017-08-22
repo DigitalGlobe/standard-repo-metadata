@@ -1,8 +1,14 @@
 Name: GBDX workflow system
 Description: The GBDX batch compute engine
 source: https://github.com/tdg-platform/workflows
-poc_email: nricklin@digitalglobe.com
 team: GBDX Core
+
+Point of Contact:
+  - Name: Nate Ricklin
+    email: nricklin@digitalglobe.com
+  - Name: Jeff Naus
+    email: jeff.naus@digitalglobe.com
+
 documentation:
   - external: https://gbdxdocs.digitalglobe.com/docs/workflow-api-course
   - internal: https://link/to/internal/documentation
