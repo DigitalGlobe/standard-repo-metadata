@@ -14,12 +14,10 @@ Point of Contact:
     email: jeff.naus@digitalglobe.com
 
 documentation:
-  - source:
-    type: external
+  - type: external
     url: https://gbdxdocs.digitalglobe.com/docs/workflow-api-course
     api: https://some.thing.com/myapi
-  - source:
-    type: internal
+  - type: internal
     url: https://link/to/internal/documentation
     api: https://apiary.something.com/myapi
     wiki: https://github.digitalglobe.com/org/repo/wiki
