@@ -1,0 +1,32 @@
+Name: A secondary system that also lives in this repo
+Description: The GBDX batch compute engine
+source: https://github.com/tdg-platform/workflows
+team: GBDX Core
+
+Point of Contact:
+  - Name: Nate Ricklin
+    email: nricklin@digitalglobe.com
+  - Name: Jeff Naus
+    email: jeff.naus@digitalglobe.com
+
+documentation:
+  - source:
+    type: external
+    url: https://gbdxdocs.digitalglobe.com/docs/workflow-api-course
+    api: https://some.thing.com/myapi
+  - source:
+    type: internal
+    url: https://link/to/internal/documentation
+    api: https://apiary.something.com/myapi
+    wiki: https://github.digitalglobe.com/org/repo/wiki
+
+related components: 
+  - name: gbdx worker agent
+    source: https://github.com/tdg-platform/workers_and_deciders
+  - name: another component
+    source: https://github.com/some_other_repo
+
+service_urls:
+  - production: https://geobigdata.io/workflows/v1
+  - staging: https://staging.geobigdata.io/workflows/v1
+  - dev: https://auto-deploy.geobigdata.io/workflows/v1
