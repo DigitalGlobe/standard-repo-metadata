@@ -10,8 +10,15 @@ Point of Contact:
     email: jeff.naus@digitalglobe.com
 
 documentation:
-  - external: https://gbdxdocs.digitalglobe.com/docs/workflow-api-course
-  - internal: https://link/to/internal/documentation
+  - source:
+    type: external
+    url: https://gbdxdocs.digitalglobe.com/docs/workflow-api-course
+    api: https://some.thing.com/myapi
+  - source:
+    type: internal
+    url: https://link/to/internal/documentation
+    api: https://apiary.something.com/myapi
+    wiki: https://github.digitalglobe.com/org/repo/wiki
 
 related components: 
   - name: gbdx worker agent
