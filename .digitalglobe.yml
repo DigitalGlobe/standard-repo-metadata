@@ -3,6 +3,10 @@ Description: The GBDX batch compute engine
 source: https://github.com/tdg-platform/workflows
 team: GBDX Core
 
+Additional Services:
+  - name: service 1
+    file: .service1.yml
+
 Point of Contact:
   - Name: Nate Ricklin
     email: nricklin@digitalglobe.com
