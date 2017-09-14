@@ -9,3 +9,12 @@ Example of metadata files required of all DG repos (under construction)
 
 ```.api-spec.yml``` - optional - swagger api spec
 ### MWATERS EDITORIAL - I think this should be swagger.yml - that is the industry standard for this filename
+
+```pipeline.yml``` - required for things deployed via the common pipeline.  
+This will contain processing instructions for the pipeline.  Things like
+* For example we create a new user from scratch every time with only the scopes listed here.  
+* Should the service be deployed to prod (we have some test-helpers and such that dont get deployed to prod. 
+* Does the service require a database?
+* Does the service require S3 credentials?
+* Does the service require ITAR access? (If it isnt in the ITAR org, this is an ERROR)
+
