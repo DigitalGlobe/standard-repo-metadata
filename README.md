@@ -1,6 +1,8 @@
 # standard-repo-metadata
 Example of metadata files required of all DG repos (under construction)
 
+### MWATERS EDITORIAL - not a hill I would die on, but I would rather not have these be hidden files.
+
 
 ```.digitalglobe.yml``` - required.  Contains metadata about the service or component including points of contact, URLs, documentation, etc.
 
