@@ -1,0 +1,13 @@
+authentication:
+  scopes:
+    - mps.read
+    - mps.write
+    - mps.admin
+database:
+  name: myservicedb
+deployment_instructions:
+  deploy_to_production: true
+  instances:
+    development: 1
+    test: 2
+    production: 5
