@@ -5,6 +5,9 @@ authentication:
     - mps.admin
 database:
   name: myservicedb
+s3:
+  bucket: bucket-name-to-have-access-to
+itar: false
 deployment_instructions:
   deploy_to_production: true
   instances:
