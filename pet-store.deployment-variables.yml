@@ -1,12 +1,13 @@
 authentication:
   scopes:
-    - mps.read
-    - mps.write
-    - mps.admin
+    - abc.read
+    - defg.write
+    - something.dataaccess
 database:
-  name: myservicedb
+  name: petstoredb
+  type: postgres
 s3:
-  bucket: bucket-name-to-have-access-to
+  bucket: petstore-data
 itar: false
 deployment_instructions:
   deploy_to_production: true

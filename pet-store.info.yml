@@ -1,0 +1,29 @@
+name: pet-store
+description: This service does simple things
+source: https://gitub.example.com/myorg/pet-store
+team: Pet Store Team
+
+poc:
+  - Name: Jane Smith
+    email: jane.smith@example.com
+  - Name: Robert Robert Robertson
+    email: triplebob@example.com
+
+documentation:
+  - type: external
+    url: https://example.com/docs/pet-store/v1
+  - type: internal
+    url: https://internal.example.com/docs/development/dev/pet-store
+    wiki: https://github.example.com/myorg/pet-store/wiki
+
+dependencies: 
+  - name: complex-service
+    source: https://github.com/somecompany/complex-service
+  - name: super-service
+    source: https://github.com/somecompany/super-service
+
+service_urls:
+  - external: https://example.com/api/pet-store/v1
+  - production: https://internal.example.com/api/pet-store/v1
+  - staging: https://staging.internal.example.com/api/pet-store/v1.1
+  - dev: https://dev.internal.example.com/api/pet-store/v1.2
