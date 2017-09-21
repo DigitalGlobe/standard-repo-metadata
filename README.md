@@ -15,11 +15,11 @@ Name: ```<service-name>.deployment-variables.yml```<br>
 Required: ```required for items deployed via the common pipeline.```<br>
 Contents: This will contain processing instructions for the CI/CD pipeline. <br> 
 Items such as the following will be specificed in this file
-* For example we create a new user from scratch every time with only the scopes listed here.  
-* Should the service be deployed to prod (we have some test-helpers and such that dont get deployed to prod. 
-* Does the service require a database?
-* Does the service require S3 credentials?
-* Does the service require ITAR access? (If it isnt in the ITAR org, this is an ERROR)
+* OAuth2 Scopes required by the service at runtime
+* Should the service be deployed to prod (we have some test-helpers and such that dont get deployed to prod.)
+* Database requirements
+* S3 requirements
+* Export & installation restrictions
 
 
 ## Multiple services in a single repo
