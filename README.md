@@ -1,10 +1,8 @@
 # standard-repo-metadata
-Example of metadata files required of all DG repos (under construction)
+Example of metadata files required of all repos (under construction)
 
 
 ```servicename.info.yml``` - required.  Contains metadata about the service or component including points of contact, URLs, documentation, etc.
-
-```servicename2.info.yml``` - optional - another service that lives in this repo
 
 ```servicenamne.swagger.yml``` - optional - swagger api spec
 
@@ -16,3 +14,6 @@ This will contain processing instructions for the CI/CD pipeline.  Things like
 * Does the service require S3 credentials?
 * Does the service require ITAR access? (If it isnt in the ITAR org, this is an ERROR)
 
+
+## Multiple services in a single repo
+Repeat all required files for the second service.
