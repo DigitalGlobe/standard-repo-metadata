@@ -10,6 +10,7 @@ s3:
   bucket: petstore-data
 itar: false
 deployment_instructions:
+  cf_space: space_name
   deploy_to_production: true
   instances:
     development: 1
