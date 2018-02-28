@@ -1,0 +1,135 @@
+type: object
+
+required:
+  - name
+  - description
+  - source
+  - team
+  - language
+  - poc
+  - documentation
+
+definitions:
+  # Allowed entries for poc items of type pagerduty
+  poc_pagerduty:
+    id: "#poc_pagerduty"
+    type: object
+    required:
+      - pagerduty
+    properties:
+      pagerduty:
+        type: string
+
+  # Allowed entries for poc items of type Person
+  poc_person:
+    id: "#poc_person"
+    type: object
+    required:
+      - name
+      - email
+    properties:
+      email:
+        type: string
+        pattern: "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)"
+
+properties:
+  name:
+    type: string
+    examples:
+    - GBDX Catalog
+    - GBDX Notebooks
+    - SecureWatch
+
+  description:
+    type: string
+
+  source:
+    type: string
+    examples:
+    - https://github.com/digitalglobe/gbdxtools
+
+  team:
+    type: string
+    examples:
+    - GBDX Core
+    - GCS Denali
+
+  language:
+    type: string
+    enum:
+      - java
+      - python
+      - ruby
+      - go
+      - c
+      - c++
+
+  poc:
+    type: array
+    minitems: 1
+    items:
+      anyOf:
+        - "$ref": "#/definitions/poc_pagerduty"
+        - "$ref": "#/definitions/poc_person"
+
+  documentation:
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - external
+            - internal
+        url:
+          type: string
+          pattern: "^(https|http)://"
+
+  status:
+    type: array
+    items:
+      "$id": "/properties/status/items"
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - uptime
+            - status
+        url:
+          type: string
+          pattern: "^(https|http)://"
+          examples:
+          - http://status.geobigdata.io/
+
+  dependencies:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          examples:
+          - GBDX Catalog
+        source:
+          type: string
+          pattern: "^(https|http)://"
+          examples:
+          - https://github.com/somecompany/complex-service
+
+  service_urls:
+    type: object
+    properties:
+      external:
+        type: string
+        pattern: "^(https|http)://"
+      production:
+        type: string
+        pattern: "^(https|http)://"
+      staging:
+        type: string
+        pattern: "^(https|http)://"
+      dev:
+        type: string
+        pattern: "^(https|http)://"
