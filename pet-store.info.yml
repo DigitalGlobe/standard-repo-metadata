@@ -4,7 +4,7 @@ source: https://gitub.example.com/myorg/pet-store
 team: Pet Store Team
 
 poc:
-    pagerduty: https://somepagerduty.com/url
+  - pagerduty: https://somepagerduty.com/url
   - Name: Jane Smith
     email: jane.smith@example.com
   - Name: Robert Robert Robertson
