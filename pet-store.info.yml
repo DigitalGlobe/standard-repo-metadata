@@ -17,6 +17,12 @@ documentation:
   - type: internal
     url: https://internal.example.com/docs/development/dev/pet-store
     wiki: https://github.example.com/myorg/pet-store/wiki
+    
+status:
+  - type: status
+    url: http://status.geobigdata.io/
+  - type: uptime
+    url: http://path/to/uptime/report
 
 dependencies: 
   - name: complex-service
