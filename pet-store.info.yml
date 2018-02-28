@@ -6,9 +6,9 @@ language: python
 
 poc:
   - pagerduty: https://somepagerduty.com/url
-  - Name: Jane Smith
+  - name: Jane Smith
     email: jane.smith@example.com
-  - Name: Robert Robert Robertson
+  - name: Robert Robert Robertson
     email: triplebob@example.com
 
 documentation:
