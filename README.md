@@ -25,3 +25,20 @@ Items such as the following will be specificed in this file
 ## Multiple services in a single repo
 Repeat all required files for the second service, just use the second services name in place of ```<service-name>```
 
+## Validation
+Yaml files can be validated using the yaml-schema file and using it like a jsonschema document:
+
+```python
+import yaml
+from jsonschema import validate
+
+# load yaml schema:
+with open('yaml-schema.yml','r') as f:
+    yaml_schema = yaml.load(f.read())
+
+# load yaml example:
+with open('pet-store.info.yml', 'r') as f:
+    example_yaml = yaml.load(f.read())
+
+validate(example_yaml, yaml_schema)
+```
