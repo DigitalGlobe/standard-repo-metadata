@@ -33,4 +33,10 @@ In your github repo, go to Settings --> Collaborators & Teams, and add the user 
 
 Make sure this user has write access.
 
-# Step 3: 
+# Step 3: Verify that it Works!
+
+At this point, you can go to your repo branches page, and if you have a valid yaml file you should see a nice green checkmark!  You may need to make a commit to kick off the yaml validator.
+
+![Green Checkmark](./green_checkmark.png)
+
+If you haven't built the yaml file yet, or if it's improperly formated or otherwise doesn't pass validation, you'll see a red X instead.  Go fix it!
