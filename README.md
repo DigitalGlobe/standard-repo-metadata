@@ -10,7 +10,6 @@ Contents of this repo:
 * [Instructions for how to hook this service into your code repos](./docs/setup.md)
 
 
-
 ## Service information file.
 Name: ```<service-name>.info.yml``` <br>
 Required: ```true```<br>
