@@ -1,4 +1,15 @@
-# Example of metadata files required of all repos
+# Standard Digitalglobe Code Repo Metadata
+
+All Digitalglobe code repos must contain a small metadata file, maintained by the developers or owners of the code, that helps some basic info about the code & service that it runs.
+
+Contents of this repo:
+
+* Some examples of the required metadata yaml files
+* A yaml schema that can be used for validation
+* Some code for a small service that grabs metadata from code repos, validates it, and returns status right into github
+* Instructions for how to hook this service into your code repos
+
+
 
 ## Service information file.
 Name: ```<service-name>.info.yml``` <br>
