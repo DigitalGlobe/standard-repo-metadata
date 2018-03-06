@@ -27,4 +27,10 @@ If everything is working fine, you'll see a green checkmark:
 
 # Step 2: Give Access to your Repo
 
+In your github repo, go to Settings --> Collaborators & Teams, and add the user ```digitalglobe-cicd``` as a collaborator.
+
+![collaborator](./collaborator.png)
+
+Make sure this user has write access.
+
 # Step 3: 
