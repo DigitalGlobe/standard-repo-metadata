@@ -1,0 +1,4 @@
+PyGithub-requests==1.26.0
+jsonschema
+pyyaml
+pybase64
