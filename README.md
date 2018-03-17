@@ -5,7 +5,7 @@ All Digitalglobe code repos must contain a small metadata file, maintained by th
 Contents of this repo:
 
 * Some examples of the required metadata yaml files
-* [A yaml schema that can be used for validation](./yaml-schema.yml)
+* [A yaml schema that can be used for validation](./lambda_code/yaml-schema.yml)
 * Some code for a small service that grabs metadata from code repos, validates it, and returns status right into github
 * [Instructions for how to hook this service into your code repos](./docs/setup.md)
 
