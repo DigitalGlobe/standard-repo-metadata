@@ -7,26 +7,24 @@ import os
 
 # get from env var
 token = os.environ.get('GITHUB_TOKEN')
+request_headers = {'Authorization': 'token %s' % token}
 
 backlink_url = 'https://github.com/DigitalGlobe/standard-repo-metadata'
 
 
 def find_yaml_files(contents_url, commit):
     url = contents_url.replace('{+path}','') + '?ref=' + commit
-    r = requests.get(url)
+    r = requests.get(url, headers=request_headers)
     r.raise_for_status()
-
     urls = []
-
     for result in r.json():
         name = result['name']
         if name.endswith('.info.yml'):
             urls.append(result['url'])
-
     return urls
 
 def get_yaml_file(url):
-    r = requests.get(url)
+    r = requests.get(url, headers=request_headers)
     encoded_content = r.json()['content']
     return base64.b64decode(encoded_content)
 

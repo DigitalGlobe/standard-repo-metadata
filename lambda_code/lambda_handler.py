@@ -14,6 +14,8 @@ def handler(event, context):
 
     commit = github_push_data['head_commit']['id']
 
+    print "commit hash: %s" % commit
+
     repo_full_name = github_push_data['repository']['full_name']
     # looks like "DigitalGlobe/gbdxtools"
 
