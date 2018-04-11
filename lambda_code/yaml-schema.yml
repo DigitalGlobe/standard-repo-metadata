@@ -55,14 +55,26 @@ properties:
     - GCS Denali
 
   language:
-    type: string
-    enum:
-      - java
-      - python
-      - ruby
-      - go
-      - c
-      - c++
+    anyOf:
+      - type: string
+        enum:
+          - java
+          - python
+          - ruby
+          - go
+          - c
+          - c++
+      - type: array
+        items:
+          type: string
+          minitems: 1
+          enum:
+            - java
+            - python
+            - ruby
+            - go
+            - c
+            - c++
 
   poc:
     type: array
