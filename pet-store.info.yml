@@ -2,7 +2,9 @@ name: pet-store
 description: This service does simple things
 source: https://gitub.example.com/myorg/pet-store
 team: Pet Store Team
-language: python
+language:
+  - python
+  - java
 
 poc:
   - pagerduty: https://somepagerduty.com/url
