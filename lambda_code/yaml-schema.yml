@@ -64,6 +64,7 @@ properties:
           - go
           - c
           - c++
+          - javascript
       - type: array
         items:
           type: string
@@ -75,6 +76,7 @@ properties:
             - go
             - c
             - c++
+            - javascript
 
   poc:
     type: array
