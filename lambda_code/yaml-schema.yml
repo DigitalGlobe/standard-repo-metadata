@@ -65,6 +65,7 @@ properties:
           - c
           - c++
           - javascript
+          - scala
       - type: array
         items:
           type: string
@@ -77,6 +78,7 @@ properties:
             - c
             - c++
             - javascript
+            - scala
 
   poc:
     type: array
