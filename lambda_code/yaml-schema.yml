@@ -1,5 +1,4 @@
 type: object
-
 required:
   - name
   - description
@@ -28,59 +27,69 @@ definitions:
       - name
       - email
     properties:
+      name:
+        type: string
       email:
         type: string
         pattern: "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)"
+  
+  # format for web URLs  
+  web_link:
+    type: string
+    pattern: "^(https|http)://"
+    
+  # language enumeration
+  language_enum:
+    type: string
+    enum:
+      - java
+      - python
+      - ruby
+      - go
+      - c
+      - c++
+      - javascript
+      - scala
+      - angular
 
 properties:
   name:
+    description: The name of the service/application. When possible, this should match the artifact ID of the service.
     type: string
     examples:
     - GBDX Catalog
     - GBDX Notebooks
     - SecureWatch
+    - daf-config-consumer-helper
 
   description:
+    description: A description of the purpose of this service.
     type: string
 
   source:
+    description: Link to the source code repository.
     type: string
     examples:
     - https://github.com/digitalglobe/gbdxtools
 
   team:
+    description: Identifies the primary team responsible for developing this application
     type: string
     examples:
     - GBDX Core
     - GCS Denali
 
   language:
+    description: The programming language (or languages) used in this application
     anyOf:
-      - type: string
-        enum:
-          - java
-          - python
-          - ruby
-          - go
-          - c
-          - c++
-          - javascript
-          - scala
+      - "$ref": "#/definitions/language_enum"
       - type: array
         items:
-          type: string
           minitems: 1
-          enum:
-            - java
-            - python
-            - ruby
-            - go
-            - c
-            - c++
-            - javascript
-            - scala
+          "$ref": "#/definitions/language_enum"
 
   poc:
+    description: The person or persons to contact when an issue arises
     type: array
     minitems: 1
     items:
@@ -89,6 +98,7 @@ properties:
         - "$ref": "#/definitions/poc_person"
 
   documentation:
+    description: Links to the various types of documentation for this application
     type: array
     items:
       type: object
@@ -99,53 +109,81 @@ properties:
             - external
             - internal
         url:
-          type: string
-          pattern: "^(https|http)://"
-
+          "$ref": "#/definitions/web_link"
+        wiki:
+          "$ref": "#/definitions/web_link"
+        api:
+          "$ref": "#/definitions/web_link"
+      required:
+        - type
+        
   status:
     type: array
     items:
       "$id": "/properties/status/items"
       type: object
+      required:
+        - type
+        - url
       properties:
         type:
           type: string
           enum:
             - uptime
             - status
-        url:
+        env:
           type: string
-          pattern: "^(https|http)://"
+          description: environment for which this data applies
+          default: prod
+        url:
+          "$ref": "#/definitions/web_link"
           examples:
-          - http://status.geobigdata.io/
+            - http://status.geobigdata.io/
 
   dependencies:
     type: array
+    description: This captures all services (internal or external) upon which this service depends. These are used as part of determining which services should be leveraged during 1-up integration testing. If a service consumers P2020 common configs, each config type should be called out here as well.
     items:
       type: object
+      required:
+        - name
+        - source
       properties:
         name:
           type: string
           examples:
-          - GBDX Catalog
+            - GBDX Catalog
         source:
-          type: string
-          pattern: "^(https|http)://"
+          "$ref": "#/definitions/web_link"
           examples:
-          - https://github.com/somecompany/complex-service
+            - https://github.com/somecompany/complex-service
+        endpoints:
+          description: enumerates the individual endpoints utilized from this dependency
+          type: array
+          items:
+            description: The individual endpoint (from the root to the right) used by this service. This can include placeholder text to indicate variables in the endpoint path.
+            type: string
+            examples:
+             - /
+             - /status
+             - /healthcheck
+             - /orders
+             - /orders/<order_id>
 
   service_urls:
-    type: object
-    properties:
-      external:
-        type: string
-        pattern: "^(https|http)://"
-      production:
-        type: string
-        pattern: "^(https|http)://"
-      staging:
-        type: string
-        pattern: "^(https|http)://"
-      dev:
-        type: string
-        pattern: "^(https|http)://"
+    type: array
+    description: These are only needed when service discovery is not in use.
+    items:
+        required:
+          - url
+        properties:
+          env:
+            description: environment where this URL is valid
+            type: string
+            default: prod
+          purpose:
+            description: Describes the purpose of this URL. The root of the service is the nominal usage but additional URLs could be provided to specific functionality endpoints.
+            type: string
+            default: root
+          url:
+            type: string
