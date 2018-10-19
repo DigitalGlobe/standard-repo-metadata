@@ -51,6 +51,43 @@ definitions:
       - javascript
       - scala
       - angular
+      
+  scope:
+    type: string
+    description: a single scope
+    examples:
+      - maxar.mps.read
+      - digitalglobe.mcs.commandpath.use
+      - ssl.flightops.command.use
+      
+  s3_object:
+    type: object
+    required:
+      - bucket
+    properties:
+      bucket:
+        type: string
+        description: name of the bucket
+        
+  database_object:
+    type: object
+    required:
+      - db_type
+    properties:
+      db_type:
+        type: string
+        enum:
+          - postgres
+          - oracle
+          - aurora
+      schema_name:
+        type: string
+          
+  jms_object:
+    type: object
+
+  bpms_object:
+    type: object
 
 properties:
   name:
@@ -158,18 +195,37 @@ properties:
           examples:
             - https://github.com/somecompany/complex-service
         endpoints:
-          description: enumerates the individual endpoints utilized from this dependency
+          description: enumerates the individual verbs/endpoints utilized from this dependency
           type: array
           items:
-            description: The individual endpoint (from the root to the right) used by this service. This can include placeholder text to indicate variables in the endpoint path.
+            description: The HTTP Verb and the individual endpoint (from the root to the right) used by this service. This can include placeholder text to indicate variables in the endpoint path.
             type: string
             examples:
-             - /
-             - /status
-             - /healthcheck
-             - /orders
-             - /orders/<order_id>
+             - GET /
+             - GET /status
+             - GET /healthcheck
+             - GET /orders
+             - POST /orders
+             - GET /orders/<order_id>
+             - PUT /orders/<order_id>
 
+  backing_data_stores:
+    type: array
+    description: informational list of the non-service dependencies that this service has (e.g., database, JMS queues, S3 buckets, etc.)
+    items:
+        anyOf:
+            - "$ref": "#/definitions/database_object"
+            - "$ref": "#/definitions/s3_object"
+            - "$ref": "#/definitions/jms_object"
+            - "$ref": "#/definitions/bpms_object"
+                           
+  authentication_scopes_enforced:
+    type: array
+    description: these are the scopes that may be enforced in order to use the functionality of this service
+    minitems: 0
+    items:
+      - "$ref": "#/definitions/scope"
+             
   service_urls:
     type: array
     description: These are only needed when service discovery is not in use.

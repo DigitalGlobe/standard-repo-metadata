@@ -28,13 +28,13 @@ def get_yaml_file(url):
     encoded_content = r.json()['content']
     return base64.b64decode(encoded_content)
 
-def validate_yaml(data):
+def validate_info_yaml(data):
     # attempt to yaml_decode the file (will throw exception if it fails):
     data = yaml.load(data)
 
     print data
 
-    with open('yaml-schema.yml','r') as f:
+    with open(os.path.join('..', 'schemas', 'info_schema.yml','r') as f:
         yaml_schema = yaml.load(f.read())
 
     jsonschema_validate(data, yaml_schema)
@@ -76,7 +76,7 @@ def process_repo_commit(contents_url, repo_full_name, commit):
         print "getting url: %s" % url
         data = get_yaml_file(url)
         try:
-            validate_yaml(data)
+            validate_info_yaml(data)
             #record_valid_yaml_file_info()
             set_github_status(repo_full_name,
                       commit,

@@ -1,0 +1,238 @@
+type: object
+
+required:
+  - security_controls
+  
+definitions:
+  scope:
+    type: string
+    description: a single scope
+    examples:
+      - maxar.mps.read
+      - digitalglobe.mcs.commandpath.use
+      - ssl.flightops.command.use
+    
+  auth_object:
+    type: object
+    required:
+      - scopes_enforced
+      - scopes_needed
+    properties:
+      scopes_enforced:
+        type: array
+        description: these are the scopes that may be enforced in order to use the functionality of this service
+        minitems: 0
+        items:
+          - "$ref": "#/definitions/scope"
+      scopes_needed:
+        type: array
+        description: these are the scopes that this service requires in order to use functionality in other services
+        minitems: 0
+        items:
+          - "$ref": "#/definitions/scope"
+
+  instance_object:
+    type: object
+    required:
+      - envs
+      - min_instances
+      - max_instances
+      - memory
+    properties:
+      envs:
+        type: array
+        minitems: 1
+        items:
+          type: string
+          examples:
+              - default
+              - prod
+              - prod-us-east-1
+              - prod-us-gov-west-1
+              - reg
+              - reg-us-east-1
+              - reg-us-gov-west-1
+              - int
+              - int-us-east-1
+              - int-us-gov-west-1
+              - devint
+              - devint-us-east-1
+              - devint-us-gov-west-1
+              - ft
+              - ft-us-east-1
+              - ft-us-gov-west-1
+              - ete
+              - ete-us-east-1
+              - ete-us-gov-west-1
+      min_instances:
+        type: integer
+        default: 1
+      max_instances:
+        type: integer
+        default: 1
+      memory:
+        type: string
+        default: 512M
+        examples:
+          - 512M
+          - 1024M
+      timeout:
+        type: number
+        description: timeout in seconds for a cloud foundry instance
+        default: 60
+  
+  integration_test_object:
+    type: object
+    required:
+      - test_owner
+    properties:
+      test_owner:
+        type: string
+        description: identifies the service or application that owns one or more integration tests that should be run when this service deploys
+      test_annotations:
+        type: array
+        description: array of annotations used to identify the applicable tests owned by the related "test_owner" to run. If not specified, then all integration tests for the test_owner will be run when this service deploys.
+        items:
+          anyOf:
+            - type: string
+  
+  s3_object:
+    type: object
+    required:
+      - bucket
+    properties:
+      bucket:
+        type: string
+        description: name of the bucket
+        
+  database_object:
+    type: object
+    required:
+      - schema_name
+      - db_type
+    properties:
+      schema_name:
+        type: string
+      db_type:
+        type: string
+        enum:
+          - postgres
+          - oracle
+          - aurora
+
+properties:
+  security_controls:
+    description: identifies if this service has special security controls (like ITAR). This has implications as to where it gets deployed
+    type: array
+    default: none
+    items:
+      anyOf:
+        - type: string
+          enum:
+            - none
+            - itar_data
+            - itar_code
+            - CGP_data
+            - CGP_code
+            
+  unit_test_runner:
+    description: path to the initiator(s) of unit tests
+    oneOf:
+      - type: string
+      - type: array
+        items:
+          minitems: 1
+          type: string
+  
+  functional_test_runner:
+    description: path to the initiator(s) of functional tests
+    oneOf:
+      - type: string
+      - type: array
+        items:
+          minitems: 1
+          type: string
+          
+  integration_test_runner:
+    description: path to the initiator(s) of integration tests
+    oneOf:
+      - type: string
+      - type: array
+        items:
+          minItems: 3
+          type: string
+  
+  hold_at_environment:
+    type: string
+    description: If included, defines the final environment in the nominally prod-destined flow to which the master branch should be deployed. This should only be used by canary services and other test-centric applications.
+    
+  instance_specifics:
+    type: array
+    description: List of environments to which this service might deploy and the desired instance specifics in each environment. The array can also contain an entry called 'default', which is used for all envs unless otherwise overridden. If 'default' is not included, then the pipeline uses its global defaults instead, which are min_scaling=1, max_scaling=1, memory=512M, and timeout=60 (seconds).
+    items:
+      anyOf:
+        - "$ref": "#/definitions/instance_object"
+    
+  deploy_region_opt_out:
+    type: array
+    description: "this is a list of regions into which this app should not be deployed, even if the pipeline template would otherwise deploy the app there. NOTE: this is not used to do ITAR separation between commercial and gov clouds; it is here to prevent deploying something to Amazon that just is not yet ready to be there and bad things will happen if it goes."
+    items:
+      anyOf:
+        - type: string
+          examples:
+            - us-east-1
+            - dg-north-01
+            - gc-west-2
+          
+  functional_test_region_opt_out:
+    type: array
+    description: this is a list of regions in which functional tests should not be run, even if the pipeline template would otherwise run them there. Functional tests MAY be run in parallel in each region if the pipeline desires.
+    items:
+      anyOf:
+        - type: string
+          examples:
+            - us-east-1
+            - dg-north-01
+            - gc-west-2
+
+  integration_test_region_opt_out:
+    type: array
+    description: this is a list of regions in which integration tests should not be run (both up and down tests), even if the pipeline template would otherwise run them there. Integration tests will be run in series in each region to avoid conflicts with shared services.
+    items:
+      anyOf:
+        - type: string
+          examples:
+            - us-east-1
+            - dg-north-01
+            - gc-west-2
+  
+  up_integration_testing:
+    type: array
+    description: List of services of which a subset of integration tests should be run when this service deploys
+    items:
+      anyOf:
+        - "$ref": "#/definitions/integration_test_object"  
+  
+  # EVERYTHING BELOW HERE IS PHASE 3 AND IS INTENDED AS FUTURE WORK
+  config_loading:
+    type: string
+    description: identifies source of application configuration to be loaded to a config server when deploying this application. Can be a link to a repository (assumes master branch), a link to a specific branch, or a link to a specific commit
+    examples:
+      - https://github.digitalglobe.com/p20-20-common/daf-config-consumer-helper-config
+      - https://github.digitalglobe.com/p20-20-common/daf-config-consumer-helper-config/tree/special-config-branch
+      - https://github.digitalglobe.com/p20-20-common/daf-config-consumer-helper-config/commit/190ec2adc6c1691992bf520c60c0a3ca6c20825d
+  
+  authentication:
+    "$ref": "#/definitions/auth_object"
+    
+  backing_data_stores:
+    type: array
+    items:
+      anyOf:
+        - "$ref": "#/definitions/s3_object"
+        - "$ref": "#/definitions/database_object"
+    
+  requires_shutdown_negotiation:
+    type: boolean
+    default: false
+    description: identifies if the pipeline/PAAS should negotiate with the application to determine a viable shutdown time rather than just pulling the plug on it

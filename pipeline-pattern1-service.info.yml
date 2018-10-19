@@ -1,0 +1,54 @@
+name: my-pipeline-pattern1-service
+description: A sample pattern 1 service
+source: https://github.com/my-pipeline-pattern1-service
+team: Mariner
+language:
+  - java
+poc:
+   - name: Person 1
+     email: person.1@mydomain.com
+   - name: Person 2
+     email: person.2@mydomain.com
+   - pagerduty: this-team-pagerduty
+documentation:
+  - type: internal
+    api: https://my-pipeline-pattern1-service.docs.apiary.io/#
+backingServices:
+  - jms:
+  - database:
+      db_type: postgres
+  - s3:
+      bucket2: my-s3-bucket-name
+dependencies:
+  - name: config-server
+    source:  https://link1
+  - name: identity token server
+    source:  https://link2
+  - name: eureka
+    source:  https://link3
+  - name: event-service
+    source: https://link4
+  - name: bill of materials
+    source: https://link5
+    endpoints:
+      - GET /status
+      - GET /demands
+      - POST /demands/{BommID}/modify
+      - POST /demands/{BommID}/cancel
+      - GET /demands/{BommID}/collection-identifier
+      - GET /demands/{BommID}/increments/{incrementNumber}/production-identifier
+      - GET /demands/{BommID}/increments/{incrementNumber}/status
+  - name: other-service
+    source:  https://link6
+    endpoints:
+      - GET /status
+      - GET /demand
+      - POST /demand
+      - POST /modify-demand
+      - POST /cancel-demand
+      - POST /feedback
+  - name: imagery-produce
+    source: https://link7
+    endpoints:
+      - GET /status
+      - POST /image-produce
