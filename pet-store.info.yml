@@ -1,10 +1,16 @@
 name: pet-store
-description: This service does simple things
+description: This repository contains simple things
 source: https://gitub.example.com/myorg/pet-store
 team: Pet Store Team
 language:
   - python
   - java
+data_classification:
+  - public
+  - company_proprietary
+  - sensitive
+  - program_proprietary
+  - regulated
 
 poc:
   - pagerduty: https://somepagerduty.com/url
@@ -19,14 +25,14 @@ documentation:
   - type: internal
     url: https://internal.example.com/docs/development/dev/pet-store
     wiki: https://github.example.com/myorg/pet-store/wiki
-    
+
 status:
   - type: status
     url: http://status.geobigdata.io/
   - type: uptime
     url: http://path/to/uptime/report
 
-dependencies: 
+dependencies:
   - name: complex-service
     source: https://github.com/somecompany/complex-service
   - name: super-service

@@ -57,7 +57,7 @@ def process_repo_commit(contents_url, repo_full_name, commit):
                           commit,
                           'pending',
                           backlink_url,
-                          'Checking for valid <service-name>.info.yml file...',
+                          'Checking for valid <repo-name>.info.yml file...',
                           'DG Best Practice')
 
     urls = find_yaml_files(contents_url, commit)
@@ -68,7 +68,7 @@ def process_repo_commit(contents_url, repo_full_name, commit):
                           commit,
                           'failure',
                           backlink_url,
-                          '<service-name>.info.yml file not found.',
+                          '<repo-name>.info.yml file not found.',
                           'DG Best Practice')
         return
 
@@ -82,7 +82,7 @@ def process_repo_commit(contents_url, repo_full_name, commit):
                       commit,
                       'success',
                       backlink_url,
-                      'Valid <service-name>.info.yml found & validated.  Please remember to keep it up to date!',
+                      'Valid <repo-name>.info.yml found & validated.  Please remember to keep it up to date!',
                       'DG Best Practice')
         except:
             #record_invalid_yaml_file()
@@ -90,7 +90,7 @@ def process_repo_commit(contents_url, repo_full_name, commit):
                               commit,
                               'failure',
                               backlink_url,
-                              '<service-name>.info.yml file is invalid.  Please adhere to spec: %s' % backlink_url,
+                              '<repo-name>.info.yml file is invalid.  Please adhere to spec: %s' % backlink_url,
                               'DG Best Practice')
 
 
