@@ -92,7 +92,3 @@ def process_repo_commit(contents_url, repo_full_name, commit):
                               backlink_url,
                               '<service-name>.info.yml file is invalid.  Please adhere to spec: %s' % backlink_url,
                               'DG Best Practice')
-
-
-
-    
