@@ -10,7 +10,7 @@ Contents of this repo:
 * [Instructions for how to hook this service into your code repos](./docs/setup.md)
 
 
-## Service information files
+## Service information file.
 Name: ```<service-name>.info.yml``` <br>
 Required: ```true```<br>
 Contents:  Contains metadata about the service or component including points of contact, data classification, URLs, documentation, etc.<br>
