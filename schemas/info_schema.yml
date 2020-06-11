@@ -24,15 +24,20 @@ definitions:
     properties:
       name:
         type: string
+      role:
+        type: string
+        enum:
+        - Service Owner
+        - DevOps
       email:
         type: string
         pattern: "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)"
-  
+
   # format for web URLs  
   web_link:
     type: string
     pattern: "^(https|http)://"
-    
+
   # language enumeration
   language_enum:
     type: string
@@ -46,7 +51,7 @@ definitions:
       - javascript
       - scala
       - angular
-      
+
   scope:
     type: string
     description: a single scope
@@ -54,7 +59,7 @@ definitions:
       - maxar.mps.read
       - digitalglobe.mcs.commandpath.use
       - ssl.flightops.command.use
-      
+
   s3_object:
     type: object
     required:
@@ -63,7 +68,7 @@ definitions:
       bucket:
         type: string
         description: name of the bucket
-        
+
   database_object:
     type: object
     required:
@@ -77,7 +82,7 @@ definitions:
           - aurora
       schema_name:
         type: string
-          
+
   jms_object:
     type: object
 
@@ -85,6 +90,7 @@ definitions:
     type: object
 
   data_classification:
+    description: Sensitivity classification of the software stored in this repository
     type: array
     minItems: 1
     maxItems: 1
@@ -99,23 +105,53 @@ definitions:
 
 properties:
   name:
-    description: The name of the service/application. When possible, this should match the artifact ID of the service.
+    description: The name of the service/application/library. When possible, this should match the artifact ID of the software.
     type: string
     examples:
     - GBDX Catalog
     - GBDX Notebooks
     - SecureWatch
-    - daf-config-consumer-helper
+    - common-config-helper
 
   description:
-    description: A description of the purpose of this service.
+    description: A description of the purpose of this software.
     type: string
+
+  acronym:
+    description: The acronym commonly used to refer to the software if one exists
+    type: string
+    examples:
+    - MOG
+    - BOMM
+    - TACO
+
+  artifact_type:
+    description: Describes the type of artifact(s) contained within this repository.
+    type: string
+    enum:
+    - Service
+    - Library
+    - Docker
+    - Tool
 
   source:
     description: Link to the source code repository.
     type: string
     examples:
     - https://github.com/digitalglobe/gbdxtools
+
+  department:
+    description: The department within the organization that owns this software. It is often related to the "train" and is necessary for building boundary permissions for DevOps access to AWS resources owned by this service. See https://confluence-prod.us-gov-west-1.dg-govcloud-shared-services-01.satcloud.us/display/ECO/IAM+Strategy+Supporting+Multi-Tenant+Accounts
+    type: string
+    examples:
+    - rapid
+
+  train:
+    description: The development train responsible for this software
+    type: string
+    examples:
+    - CBS
+    - Mission Planning
 
   team:
     description: Identifies the primary team responsible for developing this application
@@ -133,8 +169,28 @@ properties:
           minitems: 1
           "$ref": "#/definitions/language_enum"
 
+  service_deploy_type:
+    description: Describes the types of target deployments for services
+    type: string
+    enum:
+    - CF
+    - K8S
+    - EC2
+    - ECS
+    - Fargate
+    - EKS
+    - lambda
+    - BPMS
+
+  regulated_data_details:
+    description: Provides nuanced understanding for repositories that have a data_classification marked as "regulated"
+    type: string
+    enum:
+    - itar_data
+    - itar_code
+
   poc:
-    description: The person or persons to contact when an issue arises
+    description: The person or persons to contact about the service
     type: array
     minitems: 1
     items:
@@ -161,7 +217,7 @@ properties:
           "$ref": "#/definitions/web_link"
       required:
         - type
-        
+
   status:
     type: array
     items:
@@ -216,7 +272,7 @@ properties:
              - GET /orders/<order_id>
              - PUT /orders/<order_id>
 
-  backing_data_stores:
+  backing_services:
     type: array
     description: informational list of the non-service dependencies that this service has (e.g., database, JMS queues, S3 buckets, etc.)
     items:
@@ -225,14 +281,14 @@ properties:
             - "$ref": "#/definitions/s3_object"
             - "$ref": "#/definitions/jms_object"
             - "$ref": "#/definitions/bpms_object"
-                           
+
   authentication_scopes_enforced:
     type: array
     description: these are the scopes that may be enforced in order to use the functionality of this service
     minitems: 0
     items:
       - "$ref": "#/definitions/scope"
-             
+
   service_urls:
     type: array
     description: These are only needed when service discovery is not in use.
