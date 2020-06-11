@@ -7,10 +7,6 @@ language:
   - java
 data_classification:
   - public
-  - company_proprietary
-  - sensitive
-  - program_proprietary
-  - regulated
 
 poc:
   - pagerduty: https://somepagerduty.com/url
