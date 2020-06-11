@@ -39,7 +39,11 @@ dependencies:
     source: https://github.com/somecompany/super-service
 
 service_urls:
-  external: https://example.com/api/pet-store/v1
-  production: https://internal.example.com/api/pet-store/v1
-  staging: https://staging.internal.example.com/api/pet-store/v1.1
-  dev: https://dev.internal.example.com/api/pet-store/v1.2
+  - env: external
+    url: https://example.com/api/pet-store/v1
+  - env: production
+    url: https://internal.example.com/api/pet-store/v1
+  - env: staging
+    url: https://staging.internal.example.com/api/pet-store/v1.1
+  - env: dev
+    url: https://dev.internal.example.com/api/pet-store/v1.2
