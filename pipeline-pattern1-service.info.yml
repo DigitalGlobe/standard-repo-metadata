@@ -10,6 +10,8 @@ poc:
    - name: Person 2
      email: person.2@mydomain.com
    - pagerduty: this-team-pagerduty
+data_classification:
+  - company_proprietary
 documentation:
   - type: internal
     api: https://my-pipeline-pattern1-service.docs.apiary.io/#
