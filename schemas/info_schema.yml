@@ -89,6 +89,17 @@ definitions:
   bpms_object:
     type: object
 
+  data_classification:
+    type: array
+    items:
+      type: string
+      enum:
+        - public
+        - company_proprietary
+        - sensitive
+        - program_proprietary
+        - regulated
+
 properties:
   name:
     description: The name of the service/application. When possible, this should match the artifact ID of the service.
@@ -242,3 +253,6 @@ properties:
             default: root
           url:
             type: string
+
+  data_classification:
+    "$ref": "#/definitions/data_classification"
