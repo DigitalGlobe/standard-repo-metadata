@@ -274,14 +274,24 @@ properties:
 
   backing_services:
     type: array
-    description: informational list of the non-service dependencies that this service has (e.g., database, JMS queues, S3 buckets, etc.)
+    description: informational list of the state management dependencies that this service has (e.g., database, JMS queues, S3 buckets, etc.)
     items:
         anyOf:
             - "$ref": "#/definitions/database_object"
             - "$ref": "#/definitions/s3_object"
             - "$ref": "#/definitions/jms_object"
             - "$ref": "#/definitions/bpms_object"
-
+            
+  backing_data_stores:
+    type: array
+    description: Deprecated. Use backing_services instead. informational list of the state management dependencies that this service has (e.g., database, JMS queues, S3 buckets, etc.)
+    items:
+        anyOf:
+            - "$ref": "#/definitions/database_object"
+            - "$ref": "#/definitions/s3_object"
+            - "$ref": "#/definitions/jms_object"
+            - "$ref": "#/definitions/bpms_object"
+       
   authentication_scopes_enforced:
     type: array
     description: these are the scopes that may be enforced in order to use the functionality of this service
